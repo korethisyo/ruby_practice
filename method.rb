@@ -66,3 +66,16 @@ end
 
 s = 'ruby'
 puts reverse_upcase!(s)
+
+a = 'hello'
+b = 'hello'
+c = b
+
+def m(d)
+  d.upcase!
+end
+
+m(c)
+puts a
+puts b
+puts c
