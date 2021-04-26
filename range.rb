@@ -82,3 +82,78 @@ numbers = []
 end
 
 puts numbers
+
+a = [1, 2, 3, 4, 5]
+puts a[1, 3]
+
+a = [1, 2, 3, 4, 5]
+puts a.values_at(0, 2, 4)
+
+a = [1, 2, 3]
+puts a[-1]
+puts a[-2]
+puts a[-2, 2]
+puts a.last
+puts a.last(2)
+puts a.first
+puts a.first(2)
+
+a = [1, 2, 3]
+a[-3] = -10
+puts a
+
+a = [1, 2, 3, 4, 5]
+a[1, 3] = 100
+puts a
+
+a = []
+puts a.push(1, 2)
+
+a = [1, 2, 3, 1, 2, 3]
+a.delete(2)
+puts a
+
+a = [1]
+b = [2, 3]
+puts a.concat(b)
+puts a
+puts b
+
+a = [1]
+b = [2,3]
+puts a + b
+puts a
+puts b
+
+a = [1, 2, 3]
+b = [3, 4, 5]
+puts a | b
+puts a - b
+puts a & b
+
+e, *f = 100, 200, 300
+puts e
+puts f
+
+a = []
+b = [2,3]
+a.push(1)
+puts a.push(*b)
+
+def greeting(*names)
+  "#{names.join('と')}、こんにちは！"
+end
+
+puts greeting('田中')
+puts greeting('田中', '佐藤')
+puts greeting('田中', '佐藤', '鈴木')
+
+a = [1, 2, 3]
+puts [-1, 0, *a, 4, 5]
+
+# break
+numbers = [1,2,3,4,5].shuffle
+numbers.each do |n|
+  puts n
+  break if n == 5
+end

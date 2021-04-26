@@ -32,3 +32,25 @@ puts a.size
 a = {'x' => 1, 'y' => 2, 'z' => 3}
 a.delete('x')
 puts a
+
+currencies = {:japan => 'yen', :us => 'dollar', :india => 'rupee'}
+currencies[:italy] = 'euro'
+puts currencies[:us]
+
+currencies = {japan: 'yen', us: 'dollar', india: 'rupee'}
+puts currencies
+
+currencies = {japan: :yen, us: :dollar, india: :rupee}
+puts currencies
+
+
+person ={
+  name: 'Alice',
+  age: 20,
+  friends: ['Bob', 'Carol'],
+  phones: {home: '1234-0000', mobile: '5678-0000'}
+}
+
+puts person[:age]
+puts person[:friends]
+puts person[:phones][:mobile]
