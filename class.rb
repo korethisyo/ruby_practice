@@ -64,6 +64,7 @@ user.hello
 
 
 
+# selfキーワード
 class User
   attr_accessor :name
 
@@ -153,3 +154,63 @@ end
 
 product = Product.new('A great movie', 1000)
 puts product.to_s
+
+
+
+# クラスの継承
+class Object
+end
+
+object = Object.new
+puts object.to_s
+puts object.nil?
+puts Object.superclass
+puts object.methods.sort
+puts object.class
+puts object.instance_of?(Object)
+puts object.instance_of?(User)
+puts object.is_a?(Object)
+puts object.is_a?(BasicObject)
+
+# スーパークラス
+class Item
+  attr_reader :name, :price
+
+  def initialize(name, price)
+    @name = name
+    @price = price
+  end
+
+  def to_s
+    "name: #{name}, price: #{price}"
+  end
+end
+
+item = Item.new('るろ剣', 1800)
+puts item.to_s
+# puts item.name
+# puts item.price
+
+# サブクラス
+class DVD < Item
+  attr_reader :running_time
+
+  def initialize(name, price, running_time)
+    # @name = name
+    # @price = price
+    # スーパークラス(Item)ですでに上記二つの値は代入済み。superを使用し、値を呼び出せる
+    super(name, price)
+    @running_time = running_time
+  end
+
+  def to_s
+    # "name: #{name}, price: #{price}, running_time: #{running_time}"
+    "#{super}, running_time: #{running_time}"
+  end
+end
+
+dvd = DVD.new('るろ剣 最終章', 1800, 185)
+puts dvd.to_s
+# puts dvd.name
+# puts dvd.price
+# puts dvd.running_time
