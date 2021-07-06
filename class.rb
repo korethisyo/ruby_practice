@@ -228,10 +228,14 @@ class Text
     "Hi, I am #{name}"
   end
 
-  # privateメソッドはレシーバーを指定して呼び出すことはできない(下記でいうself)
-  def nihao
-    "Ni hao, Wo Shi #{self.name}"
+  def to_s
+    "name: #{name}"
   end
+
+  # privateメソッドはレシーバーを指定して呼び出すことはできない(下記でいうself)
+  # def nihao
+    # "Ni hao, Wo Shi #{self.name}"
+  # end
 
   # 2.private
   private
@@ -239,10 +243,80 @@ class Text
   def name
     'Taku'
   end
+
+  # クラスメソッドはprivateメソッドにならない
+  def self.hello
+    'hello!!'
+  end
+
+  # クラスメソッドを公開レベルを変更
+  # private_class_method :hello
+end
+
+# privateメソッドはサブクラスでも呼び出せる
+class Word < Text
+  private
+
+  def name
+    'Anne'
+  end
 end
 
 text = Text.new
 puts text.hello
 puts text.hi
-puts text.nihao
+puts text.to_s
+puts Text.hello
 
+word = Word.new
+puts word.to_s
+
+class Play
+  def foo
+    'foo'
+  end
+
+  def bar
+    'bar'
+  end
+
+  private :foo, :bar
+
+  # bazはpublicメソッド
+  def baz
+    'baz'
+  end
+end
+
+play = Play.new
+puts play.baz
+# puts play.foo
+# puts play.bar
+
+
+# protectedメソッド
+class Girl
+  attr_reader :name
+
+  def initialize(name, weight)
+    @name = name
+    @weight = weight
+  end
+
+  def heavier_than?(other_girl)
+    other_girl.weight < @weight
+  end
+  
+  # 外部公開したくない、でもレシーバの指定をして呼び出したい
+  protected
+
+  def weight
+    @weight
+  end
+end
+
+alice = Girl.new('Alice', 50)
+lina = Girl.new('Lina', 48)
+puts alice.heavier_than?(lina)
+puts lina.heavier_than?(alice)
+puts alice.weight
