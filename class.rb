@@ -214,3 +214,35 @@ puts dvd.to_s
 # puts dvd.name
 # puts dvd.price
 # puts dvd.running_time
+
+
+
+# メソッドの公開レベル
+class Text
+  # 1.public
+  def hello
+    'Hello!'
+  end
+
+  def hi
+    "Hi, I am #{name}"
+  end
+
+  # privateメソッドはレシーバーを指定して呼び出すことはできない(下記でいうself)
+  def nihao
+    "Ni hao, Wo Shi #{self.name}"
+  end
+
+  # 2.private
+  private
+
+  def name
+    'Taku'
+  end
+end
+
+text = Text.new
+puts text.hello
+puts text.hi
+puts text.nihao
+
