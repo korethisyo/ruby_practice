@@ -306,7 +306,7 @@ class Girl
   def heavier_than?(other_girl)
     other_girl.weight < @weight
   end
-  
+
   # 外部公開したくない、でもレシーバの指定をして呼び出したい
   protected
 
@@ -319,4 +319,41 @@ alice = Girl.new('Alice', 50)
 lina = Girl.new('Lina', 48)
 puts alice.heavier_than?(lina)
 puts lina.heavier_than?(alice)
-puts alice.weight
+# puts alice.weight
+
+
+
+# 定数についてもっと詳しく
+class Ramen
+  DEFAULT_PRICE = 0
+  # DEFAULT_PRICE = 1000
+
+  # privateメソッドにする
+  # private_constant :DEFAULT_PRICE
+end
+
+# 定数の再代入防止(freeze)、しかし、そもそも定数で書かれている場合、再代入する人はいないだろうと考えられるのでfreezeの使用は少ない
+# Ramen.freeze
+# Ramen::DEFAULT_PRICE = 3000
+puts Ramen::DEFAULT_PRICE
+
+class Somen
+  NAME = 'ibonoito'
+  # freezeを利用することで破壊的な変更を
+  SOME_NAMES = ['hosomen'.freeze, 'hutomen'.freeze, 'tijiremen'.freeze].freeze
+  SOME_PRICE = { 'hosomen' => 700, 'hutomen' => 750, 'tijiremen' => 800 }
+
+  def self.name_without_tijiremen(names = SOME_NAMES)
+    names.delete('tijiremen')
+    names
+  end
+end
+
+puts Somen::NAME.upcase!
+puts Somen::SOME_NAMES[0].upcase!
+Somen.name_without_tijiremen
+puts Somen::SOME_NAMES
+Somen::SOME_NAMES << 'gokubuto'
+puts Somen::SOME_NAMES
+Somen::SOME_PRICE['gokubuto'] = 900
+puts Somen::SOME_PRICE
