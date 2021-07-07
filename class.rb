@@ -350,10 +350,59 @@ class Somen
 end
 
 puts Somen::NAME.upcase!
-puts Somen::SOME_NAMES[0].upcase!
-Somen.name_without_tijiremen
+# puts Somen::SOME_NAMES[0].upcase!
+# Somen.name_without_tijiremen
 puts Somen::SOME_NAMES
-Somen::SOME_NAMES << 'gokubuto'
+# Somen::SOME_NAMES << 'gokubuto'
 puts Somen::SOME_NAMES
 Somen::SOME_PRICE['gokubuto'] = 900
 puts Somen::SOME_PRICE
+
+
+
+# クラスインスタンス変数
+class Tissue
+  # ↓クラスインスタンス変数
+  @name = 'Tissue'
+
+  def self.name
+    # ↓クラスインスタンス変数
+    @name
+  end
+
+  def initialize(name)
+    # ↓インスタンス変数
+    @name = name
+  end
+
+  def name
+    # ↓インスタンス変数
+    @name
+  end
+end
+
+puts Tissue.name
+tissue = Tissue.new('kleenex')
+puts tissue.name
+puts Tissue.name
+
+class WetTissue < Tissue
+  @name = 'WetTissue'
+
+  def self.name
+    @name
+  end
+  
+  # Tissueクラスを継承して@nameのインスタンス変数を参照
+  def upcase_name
+    @name.upcase
+  end
+end
+
+puts WetTissue.name
+wet_tissue = WetTissue.new('kireikirei')
+puts wet_tissue.name
+puts wet_tissue.upcase_name
+
+puts Tissue.name
+puts WetTissue.name
