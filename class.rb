@@ -392,7 +392,7 @@ class WetTissue < Tissue
   def self.name
     @name
   end
-  
+
   # Tissueクラスを継承して@nameのインスタンス変数を参照
   def upcase_name
     @name.upcase
@@ -404,5 +404,52 @@ wet_tissue = WetTissue.new('kireikirei')
 puts wet_tissue.name
 puts wet_tissue.upcase_name
 
+puts Tissue.name
+puts WetTissue.name
+
+
+# クラス変数(@@)
+class Tissue
+  @@name = 'Tissue'
+
+  def self.name
+    @@name
+  end
+
+  def initialize(name)
+    @@name = name
+  end
+
+  def name
+    @@name
+  end
+end
+
+class WetTissue < Tissue
+  @@name = 'WetTissue'
+
+  def self.name
+    @@name
+  end
+
+  def upcase_name
+    @@name.upcase
+  end
+end
+
+
+puts Tissue.name
+puts WetTissue.name
+
+tissue = Tissue.new('kleenex')
+puts tissue.name
+
+puts Tissue.name
+puts WetTissue.name
+
+wet_tissue = WetTissue.new('biore')
+puts wet_tissue.name
+
+puts tissue.name
 puts Tissue.name
 puts WetTissue.name
