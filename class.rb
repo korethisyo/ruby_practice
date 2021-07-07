@@ -482,3 +482,38 @@ puts program.name
 
 puts Program.name
 puts $program_name
+
+
+
+# エイリアスメソッド(メソッドの名前は違うが処理は同じ)
+class Water
+  def glass
+    '水'
+  end
+
+  # cupをglassのエイリアスメソッドとして定義
+  alias cup glass
+
+  # メソッドの削除
+  # undef cup
+end
+
+water = Water.new
+puts water.glass
+puts water.cup
+
+
+# ネストしたクラスの定義
+class Animal
+  class Mammal
+    attr_reader :kind
+
+    def initialize(kind)
+      @kind = kind
+    end
+  end
+end
+
+# 内側のクラスを参照するときは、外クラス::内クラス
+mammal = Animal::Mammal.new('horse')
+puts mammal.kind
