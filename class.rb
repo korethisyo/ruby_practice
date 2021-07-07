@@ -453,3 +453,32 @@ puts wet_tissue.name
 puts tissue.name
 puts Tissue.name
 puts WetTissue.name
+
+
+
+# グローバル変数と組み込み変数
+# クラスの内外どこからでも、参照・変更可能
+# 極力使用は避ける
+$program_name = 'Awesome program'
+
+class Program
+  def initialize(name)
+    $program_name = name
+  end
+
+  def self.name
+    $program_name
+  end
+
+  def name
+    $program_name
+  end
+end
+
+puts Program.name
+
+program = Program.new('Bad program')
+puts program.name
+
+puts Program.name
+puts $program_name
