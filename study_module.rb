@@ -13,8 +13,8 @@ class Product
     log 'title is called.'
     'A great movie'
   end
-  
-  # 下記logメソッドをProduct＆Userクラスで使用。1行目からのModuleでlogメソッドを定義。
+
+  # 下記logメソッドをProduct＆Userクラスで使用。1行目からの、Moduleでlogメソッドを定義。
   # private
 
   # def log(text)
