@@ -23,7 +23,7 @@ class Tempo
   include Comparable
 
   attr_reader :bpm
-  
+
   # bpmは音楽の速さを表す単位
   def initialize(bpm)
     @bpm = bpm
@@ -49,3 +49,33 @@ puts t_120 > t_180
 puts t_120 < t_180
 puts t_120 == t_180
 puts t_120.inspect
+
+# クラスの外側の空間は何(この黒いところ)？ => Objectクラスのインスタンス
+puts self
+puts self.class
+
+
+
+class User
+  # selfがclass自身になっている
+  puts self
+  puts self.class
+end
+
+puts User.class
+
+# 結果から、ClassクラスはModuleクラスを継承している
+puts Class.superclass
+
+module Loggable
+  # selfがModuleになっている
+  puts self
+  puts self.class
+end
+
+puts Loggable.class
+
+# ModuleクラスはObjectクラスを継承している
+puts Module.superclass
+
+# objectクラスがKernelモジュールを含んでいるので,putsなどのメソッドがClassで使用できる
