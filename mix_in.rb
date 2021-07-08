@@ -79,3 +79,29 @@ puts Loggable.class
 puts Module.superclass
 
 # objectクラスがKernelモジュールを含んでいるので,putsなどのメソッドがClassで使用できる
+
+
+# モジュールとインスタンス変数
+module NameChanger
+  def name_change
+    # include先のインスタンス変数を変更
+    self.name = 'ありす'
+  end
+end
+
+class Human
+  include NameChanger
+
+  attr_accessor :name
+
+  def initialize(name)
+    @name = name
+  end
+end
+
+human = Human.new('alice')
+puts human.name
+
+# メソッドを使用し書き換え
+human.name_change
+puts human.name
