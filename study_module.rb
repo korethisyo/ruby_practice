@@ -150,3 +150,77 @@ end
 dvd = DVD.new
 puts dvd.to_s
 # 返り値が呼び出し順の順番 <DVD> <B> <A> <Item> #<DVD:0x00000000011ab278>
+
+
+
+# モジュールに他のモジュールをinclude
+module Greeting
+  def hello
+    'hello.'
+  end
+end
+
+module Aisatsu
+  # AisatsuモジュールにGreetingモジュールをinclude
+  include Greeting
+
+  def konnichiwa
+    'こんにちは。'
+  end
+end
+
+class User
+  # AisatsuモジュールをincludeするだけでGreetingもついてくる
+  include Aisatsu
+end
+
+user = User.new
+puts user.konnichiwa
+puts user.hello
+
+
+
+# prepend
+module C
+  def to_s
+    "<C> #{super}"
+  end
+end
+
+class Coffee
+  prepend C
+
+  def to_s
+    "<Coffee> #{super}"
+  end
+end
+
+coffee = Coffee.new
+# prependでmoduleをミックスインするとクラスより先にmoduleが探索される
+# ^同名のメソッドがクラスとモジュールのある時、モジュールに定義したメソッドの方が先に優先される
+puts coffee.to_s
+
+
+
+# 既存メソッドの置き換え
+class D
+  def name
+    "Nice"
+  end
+end
+
+# モジュールで上書き内容を記述
+module NameDecorator
+  def name
+    # prependするとsuperはミックスインした先のクラスのnameメソッドを呼び出す
+    "<<#{super}>>?"
+  end
+end
+
+# 既存メソッドを置き替えるためにclassを再オープン
+class D
+  prepend NameDecorator
+end
+
+d = D.new
+puts d.name
