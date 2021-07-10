@@ -116,3 +116,37 @@ end
 
 mask = Mask.new
 mask.kind
+
+
+
+# メソッド探索のルール
+module A
+  def to_s
+    "<A> #{super}"
+  end
+end
+
+module B
+  def to_s
+    "<B> #{super}"
+  end
+end
+
+class Item
+  def to_s
+    "<Item> #{super}"
+  end
+end
+
+class DVD < Item
+  include A
+  include B
+
+  def to_s
+    "<DVD> #{super}"
+  end
+end
+
+dvd = DVD.new
+puts dvd.to_s
+# 返り値が呼び出し順の順番 <DVD> <B> <A> <Item> #<DVD:0x00000000011ab278>
