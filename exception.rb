@@ -19,7 +19,8 @@ def method_3
   puts 'method_3 start.'
   begin
     1 / 0
-    # ^例外自身からエラーの情報取得(messageやbacktraceメソッド)
+  # ^例外自身からエラーの情報取得(messageやbacktraceメソッド)
+  # rescueの隣に例外オブジェクトを格納する変数
   rescue => e
     puts "エラークラス: #{e.class}"
     puts "エラーメッセージ: #{e.message}"
@@ -31,3 +32,47 @@ def method_3
 end
 
 method_1
+
+
+
+def method_4
+  puts '-----'
+  begin
+    Foo.new
+  # ZeroDivisionErrorの例外が出た時のみ対応
+  rescue ZeroDivisionError
+    puts "0で除算しました"
+  # rescueに例外のを複数記述も可能
+  # 複数記述するときは、例外クラスの継承関係を意識する(p.337~339)
+  rescue NoMethodError
+    puts "存在しないメソッドが呼ばれました"
+  rescue NameError => e
+    puts 'NameErrorです'
+    puts e.message
+  end
+
+  puts '-----'
+end
+
+method_4
+
+
+
+# retryで処理のやり直し
+def method_5
+  retry_count = 0
+  begin
+    puts '処理を開始します'
+    1 / 0
+  rescue
+    retry_count += 1
+    if retry_count <= 3
+      puts "retry. (#{retry_count})"
+      retry
+    else
+      puts 'failed retry'
+    end
+  end
+end
+
+method_5
