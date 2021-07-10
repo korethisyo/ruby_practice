@@ -224,3 +224,32 @@ end
 
 d = D.new
 puts d.name
+
+
+
+# refinements(オーバーライドしたときの有効範囲の設定)
+module StringShuffle
+  # Stringクラスに変更を加える
+  refine String do
+    def shuffle
+      chars.shuffle.join
+    end
+  end
+end
+
+class Boy
+  # usingをどこに記述するかで有効範囲が変わる
+  # 今回だとBoyクラスでしかshuffleメソッドは有効ではない
+  using StringShuffle
+
+  def initialize(name)
+    @name = name
+  end
+
+  def shuffled_name
+    @name.shuffle
+  end
+end
+
+boy = Boy.new('Taka')
+puts boy.shuffled_name
