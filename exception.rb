@@ -76,3 +76,22 @@ def method_5
 end
 
 method_5
+
+
+
+# 意図的に例外を発生させる
+def currency_of(country)
+  case country
+  when :japan
+    puts 'yen'
+  when :us
+    puts 'dollar'
+  when :india
+    puts 'rupee'
+  else
+    # raiseメソッドで意図的に例外を発生させる
+    raise ArgumentError.new("無効な国名です #{country}")
+  end
+end
+
+currency_of(:italy)
