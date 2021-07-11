@@ -94,4 +94,25 @@ def currency_of(country)
   end
 end
 
-currency_of(:italy)
+# currency_of(:italy)
+
+
+
+require 'date'
+
+def convert_heisei_to_date(heisei_text)
+  m = heisei_text.match(/平成(?<jp_year>\d+)年(?<month>\d+)月(?<day>\d+)日/)
+  year = m[:jp_year].to_i + 1988
+  month = m[:month].to_i
+  day = m[:day].to_i
+  # 極力例外処理の範囲を絞る
+  begin
+    Date.new(year, month, day)
+  # 例外が出ればrescueの記述をせず、異常終了させても良い
+  rescue ArgumentError
+    nil
+  end
+end
+
+puts convert_heisei_to_date('平成28年12月31日')
+puts convert_heisei_to_date('平成28年99月99日')
