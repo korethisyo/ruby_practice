@@ -105,12 +105,9 @@ def convert_heisei_to_date(heisei_text)
   year = m[:jp_year].to_i + 1988
   month = m[:month].to_i
   day = m[:day].to_i
-  # 極力例外処理の範囲を絞る
-  begin
+  # 例外処理ではなく、条件分岐で対応
+  if Date.valid_date?(year, month, day)
     Date.new(year, month, day)
-  # 例外が出ればrescueの記述をせず、異常終了させても良い
-  rescue ArgumentError
-    nil
   end
 end
 
