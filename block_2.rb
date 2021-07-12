@@ -1,5 +1,7 @@
 # ブロックをメソッドの引数とする(&をつけるとブロックが引数として受け取れる)
 def greeting(&block)
+  puts block.class
+
   puts 'Hi'
   # ブロックを実行
   # greetingメソッドを呼び出したときに、ブロックが渡されているかの判断
