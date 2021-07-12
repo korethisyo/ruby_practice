@@ -38,3 +38,32 @@ end
 repeat_proc = Proc.new { |text| text * 2 }
 # Procオブジェクトをブロックとして受け取るには＆をつける
 greeting(&repeat_proc)
+
+
+
+# Procオブジェクトを普通の引数とする
+def greeting_2(arrange_proc)
+  puts 'Hi'
+  text = arrange_proc.call('WHATS UP')
+  puts text
+  puts 'Ge'
+end
+
+small_proc = proc { |text| text.downcase }
+greeting_2(small_proc)
+
+
+# 複数のProcオブジェクトを引数として受け取る
+def greeting_ja(proc_1, proc_2, proc_3)
+  puts proc_1.call('おはよう')
+  puts proc_2.call('こんにちは')
+  puts proc_3.call('こんばんは')
+end
+
+# greeting_jaに渡すProcオブジェクトの作成
+shuffle = proc { |text| text.chars.shuffle.join }
+repeat = proc { |text| text * 2 }
+question = proc { |text| "#{text}?" }
+
+# greeting_jaメソッドに用意した三つのProcオブジェクトを渡す
+greeting_ja(shuffle, repeat, question)
