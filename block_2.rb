@@ -1,13 +1,13 @@
-def greeting
+# ブロックをメソッドの引数とする(&をつけるとブロックが引数として受け取れる)
+def greeting(&block)
   puts 'Hi'
-  # ブロックに引数を渡す
-  text = yield 'Whats up?'
-  # ブロックの戻り値を出力
+  # ブロックを実行
+  text = block.call('Whats up?')
   puts text
   puts 'Bye'
 end
 
-# yieldの記述がなければ、下記のブロックが呼び出せない
+# yieldの代わりに、callメソッドを使用してブロックを呼び出す
 greeting do |text|
   text * 2
 end
