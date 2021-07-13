@@ -67,3 +67,27 @@ question = proc { |text| "#{text}?" }
 
 # greeting_jaメソッドに用意した三つのProcオブジェクトを渡す
 greeting_ja(shuffle, repeat, question)
+
+
+
+# Procオブジェクト実行方法
+do_proc = Proc.new { |a, b| a + b }
+
+puts do_proc.call(10, 20)
+# call以外でのprocオブジェクトの実行方法
+puts do_proc.yield(30, 40)
+puts do_proc.(50, 60)
+puts do_proc[70, 80]
+puts do_proc === [90, 100]
+
+
+
+# &とto_proc
+reverse_proc = Proc.new { |s| s.reverse }
+puts ['Ruby', 'Java', 'Perl'].map(&reverse_proc)
+
+# シンボルをprocオブジェクトに変換
+split_proc = :split.to_proc
+puts split_proc.call('a-b-c-d e')
+puts split_proc.call('a-b-c-d e', '-')
+puts split_proc.call('a-b-c-d e', '-', 3)
