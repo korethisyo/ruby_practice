@@ -91,3 +91,46 @@ split_proc = :split.to_proc
 puts split_proc.call('a-b-c-d e')
 puts split_proc.call('a-b-c-d e', '-')
 puts split_proc.call('a-b-c-d e', '-', 3)
+
+
+
+# クロージャ
+def generate_proc(array)
+  counter = 0
+
+  Proc.new do
+    counter += 10
+    array << counter
+  end
+end
+
+values = []
+sample_proc = generate_proc(values)
+puts values
+
+puts sample_proc.call
+puts values
+# 上記でgenerate_procメソッドが一時終了
+puts sample_proc.call
+#　再度同じメソッドを呼び出しても、counterやarrayの情報は保持されたまま
+puts values
+puts sample_proc.call
+puts values
+
+
+
+# 応用(Proc.newとlambdaの違い)
+def proc_return
+  f = Proc.new { |n| return n * 10 }
+  ret = [1, 2, 3].map(&f)
+  "ret: #{ret}"
+end
+
+def lambda_return
+  f = -> (n) { return n * 10 }
+  ret = [1, 2, 3].map(&f)
+  "ret: #{ret}"
+end
+
+puts proc_return
+puts lambda_return
