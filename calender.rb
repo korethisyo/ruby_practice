@@ -1,14 +1,5 @@
 require 'date'
 
-# def calender
-#   this_date = Date.today
-#   first_date = Date.new(this_date.year, this_date.month, 1)
-#   start_day = first_date - (first_date.cwday - 1)
-# end
-
-# puts calender
-
-
 def calendar
   this_date = Date.today
   first_date = Date.new(this_date.year, this_date.month, 1)
@@ -16,8 +7,9 @@ def calendar
   start_day = first_date - first_date.strftime('%w').to_i
 
   # strftime (%B 月の名称(January, February...) %Y 西暦)
-  puts first_date.strftime('%B %Y')
-  puts 'Su Mo Tu We Th Fr Sa'
+  puts first_date.strftime("\s\s\s\s\s\s%B\s%Y")
+  # シングルコロンだと\sが文字として認識される
+  puts "\sSu\sMo\sTu\sWe\sTh\sFr\sSa"
 
   while start_day.month <= first_date.month
 
