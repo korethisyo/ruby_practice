@@ -11,14 +11,19 @@ class KaraokeMachine
 
     # melodyを\wで検索して、分けていく
     # melody = "C D E F |E D C   |E F G A |G F E   |C   C   |C   C   |CCDDEEFF|E D C   " => ["", "C", " ", "D", " ", "E", " ", "F", " ", "", "|", "E", " ", "D", " ", "C", " ", "", " ", "", " ", "", "|", "E", " ", "F", " ", "G", " ", "A", " ", "", "|", "G", " ", "F", " ", "E", " ", "", " ", "", " ", "", "|", "C", " ", "", " ", "", " ", "C", " ", "", " ", "", " ", "", "|", "C", " ", "", " ", "", " ", "C", " ", "", " ", "", " ", "", "|", "C", "", "C", "", "D", "", "D", "", "E", "", "E", "", "F", "", "F", "|", "E", " ", "D", " ", "C", " ", "", " ", "", " "]
-    @melody.split(/(\w?)/).map do |mld|
-      mld.index()
-      
-      if mld == 12
-        mld - 12
+    @melody.split(/(\w?)/).map do |m|
+      # melodyで取得した文字列の単語一つひとつの数字として表したい
+      m.index()
+
+      if m + num <= 11
+        m + num
       else
-        mld + num
+        (m + num) - 12
       end
     end
   end
 end
+
+
+karaoke = KaraokeMachine.new("C D E F |E D C   |E F G A |G F E   |C   C   |C   C   |CCDDEEFF|E D C   ")
+puts karaoke.transpose(2)
