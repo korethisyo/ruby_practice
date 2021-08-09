@@ -1,20 +1,22 @@
 class KaraokeMachine
+  # 音楽のコード”ドレミファソ”の英語表記 => "CDEFGAB" => 半音上がるのが"C#, D#, F#, G#, A#"の5音
+  CODES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
+
   def initialize(melody)
     @melody = melody
   end
 
+  def array_of_melody
+    # melodyで取得した値をcharsで配列に変えて、それぞれのメロディーコードがcodesの配列の何番に等しいか調べる
+    @melody.chars.map do |m|
+      CODES.index(m)
+    end
+  end
+
   def transpose(num)
-    # 音楽のコード”ドレミファソ”の英語表記 => "CDEFGAB" => 半音上がるのが"C#, D#, F#, G#, A#"の5音
-    codes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"].freeze
-    # キーを変換した後のメロディー
-    changed_melody = ""
-
-    # melodyを\wで検索して、分けていく
-    # melody = "C D E F |E D C   |E F G A |G F E   |C   C   |C   C   |CCDDEEFF|E D C   " => ["", "C", " ", "D", " ", "E", " ", "F", " ", "", "|", "E", " ", "D", " ", "C", " ", "", " ", "", " ", "", "|", "E", " ", "F", " ", "G", " ", "A", " ", "", "|", "G", " ", "F", " ", "E", " ", "", " ", "", " ", "", "|", "C", " ", "", " ", "", " ", "C", " ", "", " ", "", " ", "", "|", "C", " ", "", " ", "", " ", "C", " ", "", " ", "", " ", "", "|", "C", "", "C", "", "D", "", "D", "", "E", "", "E", "", "F", "", "F", "|", "E", " ", "D", " ", "C", " ", "", " ", "", " "]
-    @melody.split(/(\w?)/).map do |m|
-      # melodyで取得した文字列の単語一つひとつの数字として表したい
-      m.index()
-
+    # CODESと比較したメロディーをキー変換していく
+    array_of_melody.map do |m|
+      # CODESが0~11までしかなく、11のキーを１音上げると0に戻る仕組みなので、配列の番号とnumを足して11を超える場合と超えない場合に条件を分ける
       if m + num <= 11
         m + num
       else
