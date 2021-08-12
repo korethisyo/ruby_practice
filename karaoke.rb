@@ -15,14 +15,14 @@ class KaraokeMachine
 
   def transpose(num)
     # CODESと比較したメロディーをキー変換していく
-    array_of_melody.map do |key|
+    changed_array = array_of_melody.map do |key|
       # CODESが0~11までしかなく、11のキーを１音上げると0に戻る仕組みなので、配列の番号とnumを足して11を超える場合と超えない場合に条件を分ける
       if key.to_i + num > 11
         (key.to_i + num) - 12
       else
         key.to_i + num
       end
-    end
+    end.join
   end
 end
 
