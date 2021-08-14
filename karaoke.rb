@@ -11,7 +11,8 @@ class KaraokeMachine
     @melody.split(/(\w#?)/).map do |m|
       # 上記で分けた音楽のコードが、コードか空白等の文字かで条件分岐
       if /(\w#?)/.match(m)
-        (CODES.index(m) + num) % 12
+        # []内で音階の変更の処理をし、処理したインデックスとCODESの対応するインデックスから変更後のコードを導き出す
+        CODES[(CODES.index(m) + num) % 12]
       else
         m
       end
@@ -21,4 +22,4 @@ end
 
 
 karaoke = KaraokeMachine.new("C D E F |E D C   |E F G A |G F E   |C   C   |C   C   |CCDDEEFF|E D C   ")
-puts karaoke.transpose(2)
+puts karaoke.transpose(5)
