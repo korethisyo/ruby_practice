@@ -6,21 +6,13 @@ class KaraokeMachine
     @melody = melody
   end
 
-  def array_of_melody
-    # melodyで取得した値をcharsで配列に変えて、それぞれのメロディーコードがcodesの配列の何番に等しいか調べる
-    @melody.chars.map do |m|
-      CODES.index(m)
-    end
-  end
-
   def transpose(num)
-    # CODESと比較したメロディーをキー変換していく
-    changed_array = array_of_melody.map do |key|
-      # CODESが0~11までしかなく、11のキーを１音上げると0に戻る仕組みなので、配列の番号とnumを足して11を超える場合と超えない場合に条件を分ける
-      if key.to_i + num > 11
-        (key.to_i + num) - 12
+    # melodyで取得した文字列を1文字ずつ分けて、処理する。
+    @melody.split(/(\w?)/).map do |m|
+      if m.match(/(\w?)/)
+        m
       else
-        key.to_i + num
+        (CODES.index(m) + num) - 12
       end
     end.join
   end
