@@ -8,11 +8,12 @@ class KaraokeMachine
 
   def transpose(num)
     # melodyで取得した文字列を1文字ずつ分けて、処理する。
-    @melody.split(/(\w?)/).map do |m|
-      if m.match(/(\w?)/)
-        m
+    @melody.split(/(\w#?)/).map do |m|
+      # 上記で分けた音楽のコードが、コードか空白等の文字かで条件分岐
+      if /(\w#?)/.match(m)
+        (CODES.index(m) + num) % 12
       else
-        (CODES.index(m) + num) - 12
+        m
       end
     end.join
   end
