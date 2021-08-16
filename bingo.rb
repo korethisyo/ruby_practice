@@ -1,8 +1,9 @@
 class Bingo
-  def generate_card
+  def self.generate_card
     title = "BINGO".split(//).map do |bingo|
-        bingo + "|"
-    end.join
-
+      sprintf("%3s", bingo)
+    end.join(" | ")
   end
 end
+
+puts Bingo.generate_card
