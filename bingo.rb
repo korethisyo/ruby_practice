@@ -25,6 +25,9 @@ class Bingo
       end.join(" | ")
     # 配列の中の配列は５つの数値を持っているので、配列１つで区切れば自然と5個目の数値で改行できる
     end.join("\n")
+
+    # 最後にBINGOと数を合わせる
+    [title, new_numbers].join("\n")
   end
 end
 
