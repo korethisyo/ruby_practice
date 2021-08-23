@@ -2,7 +2,12 @@
 # 各要素は50音順にソートもすること。
 
 class NameIndex
-  def self.create_index(names)
-    []
+  # 配列の要素の個数は不特定なので、＊を引数につけて配列に
+  def self.create_index(*names)
+    names.map{
+     |name| [] << name
+    }
   end
 end
+
+puts NameIndex.create_index("タカダ", "タニ", "シモ")
