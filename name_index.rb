@@ -1,0 +1,2 @@
+class NameIndex
+end
